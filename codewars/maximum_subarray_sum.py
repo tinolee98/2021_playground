@@ -7,6 +7,7 @@
 # 3-2. positive라면 value와 합하였을 때, 그 값이 positive라면 해당 부분까지 subarray에 포함시키고 3번을 다시 반복. // negative라면 value에 저장되었던 모든 element들을 subarray에서 제외 & break
 # 4. 양쪽 모두 탐색을 마쳤다면 저장된 subarray의 sum을 return
 # Q. the largest element가 하나가 아니라 2개 이상이라면? -> A. 그냥 모든 경우를 다 구해서 가장 큰 값만 return하면 될 거 같아!
+# Q. negative의 연속이었을 때 positive 하나와 비교하였는데, positive가 더 많으면 어떡하지? -> A. 더 더하는 것이 의미가 없는 게 아니라 기존의 알고리즘에서 break 하는 것이 아닌 for 문이 끝날 때까지 일단 해보기!
 arr = list(map(int, input(">> ").split(",")))
 if len(arr) == 0 or max(arr) < 0:
     print(0)
@@ -28,8 +29,7 @@ for max_i in range(len(arr)):
                     print("negative but sum them")
                     value, negative = 0, False  # 조건 초기화
                 else:
-                    print("break")
-                    break   # 더 더하는 것이 의미가 없어짐
+                    value += arr[i]
         else:
             negative = True
             value += arr[i]
@@ -49,8 +49,7 @@ for max_i in range(len(arr)):
                     print("negative but sum them")
                     value, negative = 0, False  # 조건 초기화
                 else:
-                    print("break")
-                    break
+                    value += arr[i]
         else:
             negative = True
             value += arr[i]
