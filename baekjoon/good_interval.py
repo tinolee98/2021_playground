@@ -14,6 +14,7 @@ for i in range(len(S)):
     if S[i] <= n and S[i+1] > n:
         a,b = S[i], S[i+1]
         break
+if 
 count = (n-a)*(b-n) - 1 # a=1, n=2, b=3 일때, [1,2]로 경우의 수가 한 가지 존재하는데 이를 못찾아냄. (n<b 인 경우?)
 if count < 0:
     print(0)
