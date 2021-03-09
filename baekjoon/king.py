@@ -21,15 +21,33 @@ king = list(king)
 king[1] = int(king[1])
 stone = list(stone)
 stone[1] = int(stone[1])
-print(move, king, stone)
+#print(move, king, stone)
 columns = ['A','B','C','D','E','F','G','H']
 rows = [1,2,3,4,5,6,7,8]
 dx = [1,-1,0,0,1,-1,1,-1]   # R,L,B,T,RT,LT,RB,LB 순
 dy = [0,0,-1,1,1,1,-1,-1]
 direction = ['R','L','B','T','RT','LT','RB','LB']
+way = []
+for i in range(move):
+    way.append(input())
 
-while move > 0:
-    move -= 1
-    in_dir = input()
-    index = direction.index(in_dir)
-    
+for moving in way:
+    index = direction.index(moving) # 움직일 방향을 정하는 단계 ex) B가 입력되었다면 index = 2 이다.
+    kx,ky = chr(ord(king[0]) + dx[index]), king[1] + dy[index]    # king이 이동할 위치
+    #print(kx,ky)
+    if kx in columns and ky in rows:            # king이 이동한 좌표가 체스판 위에 존재한다면
+        if kx == stone[0] and ky == stone[1]:   # 이동한 위치가 돌이 있는 곳이라면
+            sx, sy = chr(ord(stone[0]) + dx[index]), stone[1] + dy[index] # 돌의 위치를 구하여 돌이 움직일 수 있는지 확인 후, 이동 혹은 정지
+            if sx in columns and sy in rows:
+                king = [kx,ky]
+                stone = [sx,sy]
+            else:
+                continue
+        else:
+            king = [kx,ky]
+    #print("king: ",king)   # king과 돌의 위치 확인하기
+    #print("stone: ",stone)
+king[1] = str(king[1])
+stone[1] = str(stone[1])
+print(''.join(king))
+print(''.join(stone))
