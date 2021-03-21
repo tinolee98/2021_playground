@@ -1,5 +1,5 @@
 // HW1_driver.cpp에 사용되는 class를 선언해놓은 헤더파일
-// shape class는 interface class(destructor & pure virtual function으로만 이루어진 class)여야하므로 다시 짜야함..!
+// header file 과 function cpp file을 따로 짜는 건 어떨까?
 #include<iostream>
 #include<cmath>
 
