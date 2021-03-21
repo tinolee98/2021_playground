@@ -26,3 +26,5 @@ n = int(input("n : "))
 lost = list(map(int,input("lost : ").split()))
 reserve = list(map(int,input("reserve : ").split()))
 print(solution(n,lost,reserve))
+
+# 런타임 에러 및 몇몇 케이스에서 작동되지 않는다!
