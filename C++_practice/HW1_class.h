@@ -1,66 +1,100 @@
-// HW1_driver에 사용되는 class를 표현해놓은 헤더파일
+// HW1_driver.cpp에 사용되는 class를 선언해놓은 헤더파일
 #include<iostream>
 #include<cmath>
+
+using namespace std;
+
 const double PI = 3.141592;
 
 class Shape {
-    private:
-        double radius;  // for circle
-        double x,y;     // for two & three dimensional shapes
-        double z;       // for three dimensional shapes
-    public:
-        Shape(double _radius) : radius(_radius) {}                      // for circle & sphere
-        Shape(double _x, double _y) : x(_x), y(_y) {}                   // for rectangle
-        Shape(double _x, double _y, double _z) : x(_x), y(_y), z(_z) {} // for cubiod     
+    public:    
         virtual ~Shape() {}
+        virtual void print()
+        {
+            cout << "Shape" << endl;
+        }
 };
 
 class TwoDimensionalShape : public Shape {
     public:
-        TwoDimensionalShape(double _radius) : Shape(_radius) {}
-        TwoDimensionalShape(double _x, double _y) : Shape(_x, _y) {}
-        virtual double getArea () = 0;
+        virtual void print()
+        {
+            Shape::print();
+            cout << "TwoDimesional" << endl;
+        }
+        virtual double getArea () =0;
 };
 
-class ThreeDimnesionalShape : public Shape {
+class ThreeDimensionalShape : public Shape {
     public:
-        ThreeDimnesionalShape(double _radius) : Shape(_radius) {}
-        ThreeDimnesionalShape(double _x, double _y, double _z) : Shape(_x, _y, _z) {}
-        virtual double getVolume () = 0;
+        virtual void print()
+        {
+            Shape::print();
+            cout << "ThreeDimensional" << endl;
+        }
+        virtual double getVolume () =0;
 };
 
 class Rectangle : public TwoDimensionalShape {
+    private:
+        double x,y;
     public:
-        Rectangle(double _x, double _y) : TwoDimensionalShape(_x, _y) {}
-        double getArea(double x, double y)
+        void print() {
+            TwoDimensionalShape::print();
+            cout << "Rectangle" << endl;
+        }
+        Rectangle(double _x, double _y) : x(_x),y(_y) {}
+        double getArea()
         {
+            cout << "( x : " << x << ", y : " << y << " )"<< endl;
             return x * y;
         }
 };
 
 class Circle : public TwoDimensionalShape {
+    private:
+        double radius;
     public:
-        Circle(double _radius) : TwoDimensionalShape(_radius) {}
-        double getArea(double radius)
+        void print() {
+            TwoDimensionalShape::print();
+            cout << "Circle" << endl;
+        }
+        Circle(double _radius) : radius(_radius) {}
+        double getArea()
         {
+            cout << "( radius : " << radius << " )" << endl;
             return radius * 2 * PI;
         }
 };
 
-class Cuboid : public ThreeDimnesionalShape {
+class Cuboid : public ThreeDimensionalShape {
+    private:
+        double x,y,z;
     public:
-        Cuboid(double _x, double _y, double _z) : ThreeDimnesionalShape(_x,_y,_z) {}
-        double getVolume(double x, double y, double z)
+        void print() {
+            ThreeDimensionalShape::print();
+            cout << "Cuboid" << endl;
+        }
+        Cuboid(double _x, double _y, double _z) : x(_x), y(_y), z(_z) {}
+        double getVolume()
         {
+            cout << "( x : " << x << ", y : " << y << ", z : " << z << " )"<< endl;
             return x * y * z;
         }  
 };
 
-class Sphere : public ThreeDimnesionalShape {
+class Sphere : public ThreeDimensionalShape {
+    private:
+        double radius;
     public:
-        Sphere(double _radius) : ThreeDimnesionalShape(_radius) {}
-        double getVolume(double radius)
+        void print() {
+            ThreeDimensionalShape::print();
+            cout << "Sphere" << endl;
+        }
+        Sphere(double _radius) : radius(_radius) {}
+        double getVolume()
         {
-            return 4/3 * PI * pow(radius,3)
+            cout << "( radius : " << radius << " )"<<endl;
+            return 4/3 * PI * pow(radius,3);
         }
 };
