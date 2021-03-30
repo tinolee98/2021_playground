@@ -20,10 +20,11 @@ def solution(n, edge):
                 queue.append(j)
                 dist[j] = min(dist[i]+1, dist[j])
     print(dist)
-            
-        
-    
-    answer = 0
-    return answer
+    maximum = max(dist)
+    cnt = 0
+    for i in dist:
+        if maximum == i:
+            cnt+=1
+    return cnt
 
 solution(6,[[3,6],[4,3],[3,2],[1,3],[1,2],[2,4],[5,2]])
