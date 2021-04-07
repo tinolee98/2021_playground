@@ -12,25 +12,26 @@
 using namespace std;
 int main()
 {
+    // 도형에 들어갈 values
     double radius = 2.0;
     double x = 4.0;
     double y = 5.0;
     double z = 6.0;
-    // 각 class를 호출하고, area, volume을 출력할 수 있는 driver program 만드는 중.
-    Shape* rect = new Rectangle(x,y);
-    Shape* cir = new Circle(radius);
-    Shape* cub = new Cuboid(x,y,z);
-    Shape* sph = new Sphere(radius);
+    
+    Rectangle rect(x,y);
+    Circle cir(radius);
+    Cuboid cub(x,y,z);
+    Sphere sph(radius);
 
-    rect->print();
-    cout << "Area of Rectangle " << rect->getArea() << endl<<endl;
+    rect.print();
+    cout << "Area of Rectangle " << rect.getArea() << endl<<endl;
 
-    cir->print();
-    cout << "Area of Circle " << cir->getArea() << endl<<endl;
+    cir.print();
+    cout << "Area of Circle " << cir.getArea() << endl<<endl;
 
-    cub->print();
-    cout << "Volume of Cuboid " << cub->getVolume() << endl<<endl;
+    cub.print();
+    cout << "Volume of Cuboid " << cub.getVolume() << endl<<endl;
 
-    sph->print();
-    cout << "Volume of Sphere " << sph->getVolume() << endl<<endl;
+    sph.print();
+    cout << "Volume of Sphere " << sph.getVolume() << endl<<endl;
 }
