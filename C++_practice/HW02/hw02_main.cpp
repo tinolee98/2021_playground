@@ -6,7 +6,6 @@ using namespace std;
 int main()
 {
     FastBuffer myBuff;
-
     cout << "Cursor at " << myBuff.getCursor() << "\n";
     myBuff.insertLeft('1');
     cout << "Cursor at " << myBuff.getCursor() << "\n";
@@ -32,6 +31,7 @@ int main()
     //delete the junk characters
     cout << "Deleted: " << myBuff.deleteLeft() << "\n";
     cout << "Deleted: " << myBuff.deleteLeft() << "\n";
+    //cout << "Deleted: " << myBuff.deleteRight() << "\n";
     
     myBuff.printBuffer();
     return 0;
