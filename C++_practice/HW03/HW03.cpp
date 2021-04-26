@@ -1,8 +1,6 @@
 #include<iostream>
 #include<string>
-#include<cmath>
 #include<stack>
-#include<typeinfo>
 using namespace std;
 
 static stack<int> opStack;
@@ -32,15 +30,18 @@ void inputFunc(char _input){
     }
 }
 
+// infix -> postfix
 void infix2postfix (string _input) {
     int top;
     int current;
     for(int i=0; i < _input.length(); i++){
         top = !opStack.empty() ? opStack.top() : 0;
         current = findIndex(_input[i]);
+        // operand가 입력된 경우
         if(current == 7){
             inputFunc(_input[i]);
         }
+        // ')'가 아닌 operation이 입력된 경우
         else if(current != 3){
             if(current%5 >= top%5 || top == 4 || opStack.empty()){
                 inputFunc(_input[i]);  
@@ -54,6 +55,7 @@ void infix2postfix (string _input) {
             }
             inputFunc(_input[i]);
         }
+        // ')' 이 입력된 경우
         else{
             while(top != 4){
                 opStack.pop();
@@ -63,6 +65,7 @@ void infix2postfix (string _input) {
             opStack.pop();
         }
     }
+    // input이 더 이상 없을 때, opStack에 남아있는 모든 operation을 result에 추가
     while(!opStack.empty()){
         top = opStack.top();
         opStack.pop();
@@ -70,7 +73,6 @@ void infix2postfix (string _input) {
     }
 }
 
-// infix -> postfix
 int main(){
     string input;
     cin >> input;
