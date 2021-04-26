@@ -38,20 +38,22 @@ void infix2postfix (string _input) {
     int temp;
     int current;
     for(int i=0; i < _input.length(); i++){
-        if(isdigit(_input[i])){ // input이 숫자라면
+        if(findIndex(_input[i]) == 7){ // input이 숫자라면
             inputFunc(_input[i]);
         }
         else{
-            cout << "I'm here! and now is " << now << endl;
+            cout << "It's operation" << endl;
             current = findIndex(_input[i]);
             if(!opStack.empty() && current%5 < opStack.top()%5 && opStack.top() != 4){
                 now = 1;
+                cout << "now is 1" << endl;
             }
             if(_input[i] == ')' || now){
-                while (opStack.top() != 4 && !opStack.empty()){
+                while (!opStack.empty() && opStack.top() != 4 ){
                     temp = opStack.top();
                     opStack.pop();
                     cout << "op" <<op[temp] << endl;
+                    if(temp == 3) break;
                     result += op[temp];
                     cout << result << endl;
                 }
@@ -63,12 +65,14 @@ void infix2postfix (string _input) {
                 inputFunc(_input[i]);
             }
         }
+        cout << "opStack size " << opStack.size() << endl<<endl;    
     }
     while(!opStack.empty()){
         temp = opStack.top();
         opStack.pop();
-        result += temp;
-        cout << temp <<result << endl;
+        if(temp == 3) continue;
+        result += op[temp];
+        cout << result << endl;
     }
 }
 
