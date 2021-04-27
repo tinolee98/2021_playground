@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>스타일 지정하기</title>
+        <!--<link rel="stylesheet" type="text/css" href="styleSheet.css">-->
+        <style type="text/css">
+            @import url("styleSheet.css");
+            body{
+                background-color: gray;
+            }
+            .style1{
+                color: red;
+                font-size: 30pt;
+                background-color: white;
+            }
+            #style2 {
+                color: green;
+                font-size: 15pt;
+                font-family: Arial;
+                background-color: yellow;
+            }
+        </style>
+    </head>
+    <body>
+        <p> css 이해하기</p>
+        <p style="color:blue; font-size:40pt;">blue</p>
+        <p class="style1">style1</p>
+        <p id="style2">style2</p>
+        <div class="style1">div입니다.</div>
+        <div id="style2">div2</div>
+        <span>normal span</span>
+        <span class="style1">span1</span>
+        <span id="style2">span2</span>
+    </body>
+</html>
