@@ -38,3 +38,10 @@ outer: for(var i=0;i<3;i++){
 }
 console.log("done!");
 console.log(Array+'');
+
+function add(x,y) {
+    console.log(arguments);
+    return x+y;
+}
+
+add(2,5,10);
