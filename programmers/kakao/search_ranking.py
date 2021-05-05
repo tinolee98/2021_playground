@@ -3,6 +3,7 @@
 import sys
 
 def solution (info, query):
+    answer = []
     lst_query = []
     for q in query:
         lst_query.append(list(map(str,q.split())))
@@ -20,14 +21,31 @@ def solution (info, query):
         lst_info.append(list(map(str,q.split())))
     print(lst_info)
     info = lst_info
-    answer = []
 
     # 이제 비교만 하면 됩니다.
-    for i in query:
-        for j in range(len(i)):
-            standard = i[j]
-            for k in info:
-                pass
+    for q in query:
+        test = []
+        cnt = 0
+        for l in range(len(q)):
+            #print(q)
+            if q[l] == '-':
+                #print('-')
+                continue
+            for i in range(len(info)):
+                if i in test:
+                    continue
+                elif l != 4 and q[l] != info[i][l]:
+                #    print("append")
+                    test.append(i)
+                    continue
+                elif l == 4 and int(q[l]) <= int(info[i][l]):
+                    cnt += 1
+                    #print("l", l, "i", i)
+                    #print("q[l]", q[l], "info[i][l]", info[i][l])
+                    #print(cnt)
+
+        print(cnt)
+        answer.append(cnt)
     return answer
 
 
