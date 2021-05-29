@@ -7,7 +7,7 @@ for x1, y1, r1, x2, y2, r2 in lst:
     distance = ((x1-x2)**2 + (y1-y2)**2)**(1/2)
     pr = r1+r2
     mr = max(r1,r2) - min(r1,r2)
-    print(distance, pr, mr)
+    #print(distance, pr, mr)
     if pr == distance or mr == distance and distance != 0:
         print(1)
     elif distance == 0 and mr == 0:
