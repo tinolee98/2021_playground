@@ -1,5 +1,5 @@
 #pragma once
-
+#include<list>
 class RuntimeException { // generic run-time exception
 private:
 	string errorMsg;
@@ -108,8 +108,12 @@ public: // public functions
 
 	void erase(const K& k) throw(NonexistentElement); // remove key k entry
 	void erase(const Iterator& p); // remove entry at p
-	Iterator begin(); // iterator to first entry
-	Iterator end(); // iterator to end entry
+	Iterator begin() {
+		TPos v = root();
+		while (v.isInternal()) v = v.left();
+		return Iterator(v.parent());
+		} // iterator to first entry
+	Iterator end() {return Iterator(T.getRoot());} // iterator to end entry
   
 	// PROBLEM 3 (b)
 	void displayTree();
@@ -122,7 +126,8 @@ protected: // local utilities
 	typedef BinaryTree<E> BTree; // linked binary tree
 	typedef typename BTree::Position TPos; // position in the tree
 
-	TPos root() const; // get virtual root
+	TPos root() const
+	{  return T.getRoot().left();  } // get virtual root
 	TPos finder(const K& k, TPos v); // find utility
 	TPos inserter(const K& k, const V& x); // insert utility
 	TPos eraser(TPos& v); // erase utility
