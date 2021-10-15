@@ -73,6 +73,8 @@ def solution(target):
 if target in lst:
     print("exactly")
     print(len(str(target)))
+elif target == now:
+    print(0)
 elif l1 < target < l2:
     print("l1,l2")
     print(min(target-l1+len(str(l1)), l2-target+len(str(l2))))
