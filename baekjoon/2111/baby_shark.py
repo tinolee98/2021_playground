@@ -11,10 +11,8 @@ for i in range(N):
         elif temp[j] != 0:
             fishes[temp[j]].append((i,j,temp[j]))
     fishSpot.append(temp)
-# print(fishes)
 size = 2
 eatenFishes = 0
-visited = [[False for _ in range(N)] for _ in range(N)]
 
 q = deque([now])
 result = 0
@@ -50,27 +48,15 @@ while q:
     canEat = []
     for lst in fishes[:size]:
         canEat += lst
-    # nextFish = 2*N
     nextSpot = 0
     if not canEat:
         break
-    # print("canEat",canEat)
     dist = 0
     nextSpot= BFS(i,j,size,canEat,fishSpot)
-    # nextSpot = []
-    # for x,y,s in canEat:
-    #     dist = abs(x-i)+abs(y-j)
-    #     if dist < nextFish:
-    #         nextFish = dist
-    #         nextSpot = [(x,y,s)]
-    #     elif dist == nextFish:
-    #         nextSpot.append((x,y,s))
     nextSpot.sort()
-    # print("which fish shark will eat",nextSpot)
     if not nextSpot:
         break
     x,y,s,dist = nextSpot[0]
-    #dist = abs(x-i)+abs(y-j)
     q.append((x,y,s))
     fishes[s].remove((x,y,s))
     result += dist
@@ -78,11 +64,5 @@ while q:
     if size == eatenFishes:
         eatenFishes = 0
         size +=1
-    # print("remained fishes", fishes)
-    # print("size", size)
-    # print("q",q)
-    # print("eatenFishes", eatenFishes)
-    # print("distance", result)
-    # print("---------")
 print(result)
 
