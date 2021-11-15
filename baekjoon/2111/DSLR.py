@@ -1,83 +1,49 @@
 from collections import deque
-T = int(input())
-INF = "A"*10001
-def makeNum(lst):
-    return int(''.join(list(lst)))
+N = int(input())
 
-def isSame(A,B):
-    if A == B:
-        return True
-    else:
-        return False
+def funcL(now):
+    now = '0'*(4-len(now))+now
+    now = list(now)
+    now[0],now[1],now[2],now[3] = now[1],now[2],now[3],now[0]
+    return int(''.join(now))
 
-def makeStr(A):
-    if A//1000:
-        return str(A)
-    elif A//100:
-        return '0'+str(A)
-    elif A//10:
-        return '00'+str(A)
-    return '000'+str(A)
+def funcR(now):
+    now = '0'*(4-len(now))+now
+    now = list(now)
+    now[0],now[1],now[2],now[3] = now[3],now[0],now[1],now[2]
+    return int(''.join(now))
 
-def D(A):
-    A = (A*2)%10000
-    return A,'D'
+def Str(now):
+    now = str(now)
+    return "0"*(4-len(now))+now
 
-def S(A):
-    if A == 0:
-        return 9999,'S'
-    else:
-        return A-1,'S'
-
-def L(A):
-    A = makeStr(A)
-    return makeNum(A[1]+A[2]+A[3]+A[0]),'L'
-
-def R(A):
-    A = makeStr(A)
-    return makeNum(A[3]+A[0]+A[1]+A[2]),'R'
-
-def InDp(A,dp,past,now):
-    #print("A",A,"dp[A]",dp[A])
-    if dp[A] == INF:
-        dp[A] = past+now
-    elif len(dp[A]) > len(past+now):
-        dp[A] = past+now
-    # print("A:",A,"dp[A]:",dp[A], past+now)
-
-visited = [False for _ in range(10000)]
-    
-
-for _ in range(T):
-    a,b = map(int, input().split())
-    A = makeStr(a)
-    B = makeStr(b)
-    dp = [INF for _ in range(10000)]
-    dp[a] = ""
-    visited[a] = True
-    A = makeNum(A)
-    q=deque([A])
-    while not isSame(A,b):
-        A = q.popleft()
-        # print("std", A)
-        d,dc = D(A)
-        if not visited[d]:
-            visited[d] = True
-            InDp(d,dp,dp[A],dc)
-        q.append(d)
-        s,sc = S(A)
-        if not visited[s]:
-            visited[s] = True
-            InDp(s,dp,dp[A],sc)
-        q.append(s)
-        l,lc = L(A)
-        if not visited[l]:
-            visited[l] = True
-            InDp(l,dp,dp[A],lc)
-        q.append(l)
-        r,rc = R(A)
-        if not visited[r]:
-            visited[r] = True
-            InDp(r,dp,dp[A],rc)
-        
-    print(dp[b])
+for _ in range(N):
+    now, target = list(input().split())
+    now = Str(now)
+    target = Str(target)
+    q = deque([(now, "")])
+    #print(now, target)
+    visited = [False for _ in range(10000)]
+    visited[int(now)] = True
+    finish = False
+    while q:
+        now, cmds = q.popleft()
+        #print(now, cmds)
+        # D: 두 배 만들기
+        D = int(now)*2 if int(now)*2 < 10000 else int(now)*2%10000
+        # S: 1을 빼기
+        S = int(now)-1 if int(now)>0 else 9999
+        # L: 자릿수를 왼쪽으로 이동
+        L = funcL(now)
+        # R: 자릿수를 오른쪽으로 이동
+        R = funcR(now)
+        for n,c in [(D,"D"), (S,"S"), (L, "L"), (R, "R")]:
+            if Str(n) == target:
+                print(cmds+c)
+                finish = True
+                break
+            if not visited[n] and n not in q:
+                visited[n] = True
+                q.append((Str(n), cmds+c))
+        if finish:
+            break
