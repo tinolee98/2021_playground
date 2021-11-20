@@ -24,4 +24,3 @@ def Cycle(now,position):
 
 for j in range(3):
     print(Cycle(keys[0], j))
-
