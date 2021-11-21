@@ -1,18 +1,17 @@
 # 우선 이진 트리를 작성하고, 이를 이용하여 후위 순회 결과를 출력하자
 from collections import deque
+import sys
+sys.setrecursionlimit(20000)
 
 class Node():
     def __init__(self,data):
         self.data = data
         self.left = None
         self.right = None
-        self.parent = None
     def setLeft(self, left):
         self.left = left
-        left.parent = self
     def setRight(self, right):
         self.right = right
-        right.parent = self
 
 class Tree():
     def __init__(self):
@@ -68,14 +67,8 @@ while True:
         if k == 0:
             tree.setRoot(nodeList[0])
         else:
-            # tree.addNode(nodeList[k-1], nodeList[k])
             tree.addNode(nodeList[0],nodeList[k])
         k += 1
     except:
         break
 tree.postOrder(tree.root)
-# while True:
-#     try:
-#         n = int(input())
-#     except:
-#         break
